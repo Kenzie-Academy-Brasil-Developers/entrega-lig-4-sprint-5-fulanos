@@ -1,0 +1,21 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.principal{
+    display: flex;
+    flex-direction: row;
+}
+
+.linha{
+    display: flex;
+    flex-direction: row;
+}
+
+.linha{
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+}
