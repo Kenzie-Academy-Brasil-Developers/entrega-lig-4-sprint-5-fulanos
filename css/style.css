@@ -5,17 +5,38 @@ body{
 }
 
 .principal{
+    background-color: transparent;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.coluna{ /* alterei para ".coluna", pois tinham 2 ".linha" */
+    display: flex;
+    flex-direction: column-reverse;  /* alterei para "column-reverse", pois estava como row a coluna */
 }
 
 .linha{
     display: flex;
-    flex-direction: row;
-}
-
-.linha{
-    height: 30px;
-    width: 30px;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
     border: 1px solid black;
 }
+
+.disco-vermelho {
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+
+.disco-preto {
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+
