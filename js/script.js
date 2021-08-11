@@ -9,7 +9,7 @@ const tabuleiro = [
 ]
 
 let jogada = 'vermelho'
-
+let somJogador = new Audio('audio/toin.mp3');
 
 function geraTabuleiro(mapa) {
 
@@ -40,13 +40,14 @@ function startGame() {
     let insersao = geraTabuleiro(tabuleiro)
     section.append(insersao)
     button.innerText = "Reiniciar"
+    jogada = 'vermelho' //Reiniciar o jogo com a peça vermelha. Não estava resetando o revezamento de jogador.
     selecionarTorres()
 }
 
 function selecionarTorres() {
 
     let torres = document.querySelectorAll('.coluna')
-    torres = [...torres]    
+    torres = [...torres]
 
     torres.forEach(function (tower) {
         tower.addEventListener("click", revezarJogador)
@@ -66,6 +67,7 @@ function revezarJogador(event) {
                 let disco = document.createElement('div')
                 disco.classList.add('disco-vermelho')
                 torre[i].appendChild(disco)
+                duasVezes() //efeito de áudio
                 jogada = 'preto'
                 break
 
@@ -74,11 +76,21 @@ function revezarJogador(event) {
                 let disco = document.createElement('div')
                 disco.classList.add('disco-preto')
                 torre[i].appendChild(disco)
+                duasVezes() //efeito de áudio
                 jogada = 'vermelho'
                 break
             }
         }
     }
+}
+
+function duasVezes() { //função que sincroniza a animação com o audio
+    function toca() {
+        somJogador.volume = 0.1
+        somJogador.play();
+    }
+    toca();
+    setTimeout(toca, 1000);
 }
 
 function defineVitoria() {
