@@ -105,13 +105,36 @@ function defineVitoria(posicao,classe) {
     verificaDiagonalDecrescente(posicao,classe)
 }
 
-function verificaHorizontal(posicao,classe) { }
+function verificaHorizontal(posicao,classe) {
+    
+    let classeReferencia = classe.split("-")[1]
+    let conjuntos = 4
+    let coluna = posicao[0] - 3
+    let linha = posicao[1]
+    for (let i = 0; i < conjuntos; i++) {
+        let contagem = 0
+        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
+            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
+            if (tabuleiro[coluna + 1][linha] === classeReferencia) { contagem++ }
+            if (tabuleiro[coluna + 2][linha] === classeReferencia) { contagem++ }
+            if (tabuleiro[coluna + 3][linha] === classeReferencia) { contagem++ }
+        }
+        if (contagem === 4) {
+            //funçao vitória
+            console.log(classeReferencia, "venceu")
+            break
+        }
+        coluna++
+    }
+}
+
 function verificaVertical(posicao,classe) { }
 
 function verificaDiagonalCrescente(posicao,classe) {
     console.log(posicao)
-    console.log(classe) 
-    console.table(tabuleiro)
+    console.log(classe)
+    // console.table(tabuleiro)
+    console.log(posicao[1])
 }
 
 function verificaDiagonalDecrescente(posicao,classe) { }
