@@ -9,6 +9,7 @@ let tabuleiro = [
 ]
 
 let jogada = 'vermelho'
+let somJogador = new Audio('audio/toin.mp3');
 
 function geraTabuleiro(mapa) {
 
@@ -29,7 +30,7 @@ function geraTabuleiro(mapa) {
         }
         principal.append(coluna)
     }
-  return principal;
+    return principal;
 }
 
 let button = document.getElementById("startbutton");
@@ -41,12 +42,12 @@ function startGame() {
     let insersao = geraTabuleiro(tabuleiro)
     section.append(insersao)
     button.innerText = "Reiniciar"
-    jogada = 'vermelho'
+    jogada = 'vermelho' //Reiniciar o jogo com a peça vermelha. Não estava resetando o revezamento de jogador.
     selecionarTorres()
 }
 
 function selecionarTorres() {
- 
+
     let torres = document.querySelectorAll('.coluna')
     torres = [...torres]
 
@@ -74,6 +75,7 @@ function revezarJogador(event) {
                 let classeDisco = disco.classList[0]
                 tabuleiro[posicaoDisco[0]][posicaoDisco[1]] = jogada
 
+                duasVezes() //efeito de áudio
                 jogada = 'preto'
                 defineVitoria(posicaoDisco, classeDisco)
                 break
@@ -90,6 +92,7 @@ function revezarJogador(event) {
                 let classeDisco = disco.classList[0]
                 tabuleiro[posicaoDisco[0]][posicaoDisco[1]] = jogada
 
+                duasVezes() //efeito de áudio
                 jogada = 'vermelho'
                 defineVitoria(posicaoDisco, classeDisco)
                 break
@@ -97,7 +100,16 @@ function revezarJogador(event) {
         }
 
     }
-  
+
+}
+
+function duasVezes() { //função que sincroniza a animação com o audio
+    function toca() {
+        somJogador.volume = 0.1
+        somJogador.play();
+    }
+    toca();
+    setTimeout(toca, 1000);
 }
 
 function defineVitoria(posicao, classe) {
@@ -107,8 +119,8 @@ function defineVitoria(posicao, classe) {
     verificaDiagonalDecrescente(posicao, classe)
 }
 
-function verificaHorizontal(posicao,classe) {
-    
+function verificaHorizontal(posicao, classe) {
+
     let classeReferencia = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
@@ -130,26 +142,26 @@ function verificaHorizontal(posicao,classe) {
     }
 }
 
-function verificaVertical(posicao,classe) {
-  let contagem  = 0
-  let corClasse = classe.split("-")[1]
-  let x = posicao[0] //coluna
-  let y = posicao[1]-3 //linha
-  
-  for(let i = 0; i < 4; i++){
+function verificaVertical(posicao, classe) {
     let contagem = 0
-    if(y >= 0 && y <= 5 && x >= 0 && x <= 6){
-      if(tabuleiro[x][y] === corClasse){contagem++}
-      if(tabuleiro[x][y+1] === corClasse){contagem++}
-      if(tabuleiro[x][y+2] === corClasse){contagem++}
-      if(tabuleiro[x][y+3] === corClasse){contagem++}
+    let corClasse = classe.split("-")[1]
+    let x = posicao[0] //coluna
+    let y = posicao[1] - 3 //linha
+
+    for (let i = 0; i < 4; i++) {
+        let contagem = 0
+        if (y >= 0 && y <= 5 && x >= 0 && x <= 6) {
+            if (tabuleiro[x][y] === corClasse) { contagem++ }
+            if (tabuleiro[x][y + 1] === corClasse) { contagem++ }
+            if (tabuleiro[x][y + 2] === corClasse) { contagem++ }
+            if (tabuleiro[x][y + 3] === corClasse) { contagem++ }
+        }
+        if (contagem === 4) {
+            console.log(corClasse, 'venceu')
+            break
+        }
+        y++
     }
-    if(contagem === 4){
-      console.log(corClasse, 'venceu')
-      break
-    }
-    y++
-  }
 }
 
 function verificaDiagonalCrescente(posicao, classe) {
@@ -158,7 +170,7 @@ function verificaDiagonalCrescente(posicao, classe) {
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1] - 3
-    
+
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
 

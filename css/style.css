@@ -1,15 +1,29 @@
+@keyframes animação{
+    0%{transform: translateY( -800px)}
+    25%{transform: translateY( 5px) scale(1.2,0.8)}
+    50%{transform: translateY(-90px)}
+    75%{transform: translateY(5px) scale(1.2,0.8)}
+    100%{transform: translateY(0px)}
+  }
+
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+h1 {
+    padding: 1em;
+    font-size: 30px;
+    font-weight: bold;
+}
+
 .principal{
+    padding-bottom: 1em;
     background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .coluna{ /* alterei para ".coluna", pois tinham 2 ".linha" */
@@ -21,22 +35,54 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 50px;
-    width: 50px;
+    height: 2.5em;
+    width: 2.5em;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 .disco-vermelho {
     background-color: red;
-    width: 30px;
-    height: 30px;
+    height: 2.3em;
+    width: 2.3em;
     border-radius: 50px;
+    animation: animação 1.5s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
 .disco-preto {
     background-color: black;
-    width: 30px;
-    height: 30px;
+    height: 2.3em;
+    width: 2.3em;
     border-radius: 50px;
+    animation: animação 1.5s ease-in-out;
+    animation-fill-mode: forwards;
 }
 
+#startbutton {
+    padding: 0.5em;
+}
+@media (min-width: 425px) {
+    .linha {
+        height: 3.2em;
+        width: 3.2em;
+    }
+    
+    .disco-vermelho, .disco-preto {
+        height: 3em;
+        width: 3em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+
+    .linha {
+        height: 4em;
+        width: 4em;
+    }
+    
+    .disco-vermelho, .disco-preto {
+        height: 3.8em;
+        width: 3.8em;
+    }
+}
