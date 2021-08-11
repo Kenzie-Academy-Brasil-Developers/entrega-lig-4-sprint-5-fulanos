@@ -97,7 +97,7 @@ function revezarJogador(event) {
         }
 
     }
-  }
+  
 }
 
 function defineVitoria(posicao, classe) {
