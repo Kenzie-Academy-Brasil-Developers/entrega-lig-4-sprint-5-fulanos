@@ -105,11 +105,31 @@ function defineVitoria(posicao,classe) {
 }
 
 function verificaHorizontal(posicao,classe) { }
+
 function verificaVertical(posicao,classe) {
-  console.log(posicao)
-  console.log(classe) 
-  console.table(tabuleiro)
- }
+  let contagem  = 0
+  let corClasse = classe.split("-")[1]
+  let x = posicao[0] //coluna
+  let y = posicao[1]-3 //linha
+  
+  for(let i = 0; i < 4; i++){
+    let contagem = 0
+    if(y >= 0 && y <= 5 && x >= 0 && x <= 6){
+      if(tabuleiro[x][y] === corClasse){contagem++}
+      if(tabuleiro[x][y+1] === corClasse){contagem++}
+      if(tabuleiro[x][y+2] === corClasse){contagem++}
+      if(tabuleiro[x][y+3] === corClasse){contagem++}
+    }
+    if(contagem === 4){
+      console.log(corClasse, 'venceu')
+      break
+    }
+    y++
+  }
+}
+
+
+ 
 
 function verificaDiagonalCrescente(posicao,classe) {
    
