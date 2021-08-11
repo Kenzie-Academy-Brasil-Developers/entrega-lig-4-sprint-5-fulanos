@@ -29,13 +29,13 @@ function geraTabuleiro(mapa) {
         }
         principal.append(coluna)
     }
-    return principal
+  return principal;
 }
 
-let button = document.getElementById("startbutton")
-button.addEventListener("click", startGame)
+let button = document.getElementById("startbutton");
+button.addEventListener("click", startGame);
 
-let section = document.querySelector("section")
+let section = document.querySelector("section");
 function startGame() {
     section.innerHTML = ""
     let insersao = geraTabuleiro(tabuleiro)
@@ -46,7 +46,7 @@ function startGame() {
 }
 
 function selecionarTorres() {
-
+ 
     let torres = document.querySelectorAll('.coluna')
     torres = [...torres]
 
@@ -56,7 +56,6 @@ function selecionarTorres() {
 }
 
 function revezarJogador(event) {
-
     let torre = Array.from(event.currentTarget.children)
 
     for (let i = 0; i < torre.length; i++) {
@@ -96,7 +95,9 @@ function revezarJogador(event) {
                 break
             }
         }
+
     }
+  }
 }
 
 function defineVitoria(posicao, classe) {
@@ -106,7 +107,6 @@ function defineVitoria(posicao, classe) {
     verificaDiagonalDecrescente(posicao, classe)
 }
 
-verificacaoHorizontal
 function verificaHorizontal(posicao,classe) {
     
     let classeReferencia = classe.split("-")[1]
@@ -130,7 +130,27 @@ function verificaHorizontal(posicao,classe) {
     }
 }
 
-function verificaVertical(posicao, classe) { }
+function verificaVertical(posicao,classe) {
+  let contagem  = 0
+  let corClasse = classe.split("-")[1]
+  let x = posicao[0] //coluna
+  let y = posicao[1]-3 //linha
+  
+  for(let i = 0; i < 4; i++){
+    let contagem = 0
+    if(y >= 0 && y <= 5 && x >= 0 && x <= 6){
+      if(tabuleiro[x][y] === corClasse){contagem++}
+      if(tabuleiro[x][y+1] === corClasse){contagem++}
+      if(tabuleiro[x][y+2] === corClasse){contagem++}
+      if(tabuleiro[x][y+3] === corClasse){contagem++}
+    }
+    if(contagem === 4){
+      console.log(corClasse, 'venceu')
+      break
+    }
+    y++
+  }
+}
 
 function verificaDiagonalCrescente(posicao, classe) {
 
