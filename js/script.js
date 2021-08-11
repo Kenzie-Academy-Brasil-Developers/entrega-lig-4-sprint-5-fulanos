@@ -121,20 +121,22 @@ function defineVitoria(posicao, classe) {
 
 function verificaHorizontal(posicao, classe) {
 
-    let classeReferencia = classe.split("-")[1]
+    let corClasse = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1]
+
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
-            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 1][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 2][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 3][linha] === classeReferencia) { contagem++ }
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna + j] !== undefined) {
+                if (tabuleiro[coluna + j][linha] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
-            vitoria(classeReferencia)
+            vitoria(corClasse)
             break
         }
         coluna++
@@ -142,70 +144,71 @@ function verificaHorizontal(posicao, classe) {
 }
 
 function verificaVertical(posicao, classe) {
-    let contagem = 0
-    let corClasse = classe.split("-")[1]
-    let x = posicao[0] //coluna
-    let y = posicao[1] - 3 //linha
 
-    for (let i = 0; i < 4; i++) {
+    let corClasse = classe.split("-")[1]
+    let conjuntos = 1
+    let coluna = posicao[0]
+    let linha = posicao[1] - 3
+
+    for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-        if (y >= 0 && y <= 5 && x >= 0 && x <= 6) {
-            if (tabuleiro[x][y] === corClasse) { contagem++ }
-            if (tabuleiro[x][y + 1] === corClasse) { contagem++ }
-            if (tabuleiro[x][y + 2] === corClasse) { contagem++ }
-            if (tabuleiro[x][y + 3] === corClasse) { contagem++ }
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna][linha + j] !== undefined) {
+                if (tabuleiro[coluna][linha + j] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
             vitoria(corClasse)
             break
         }
-        y++
+        linha++
     }
 }
 
 function verificaDiagonalCrescente(posicao, classe) {
 
-    let classeReferencia = classe.split("-")[1]
+    let corClasse = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1] - 3
 
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-
-        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
-            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 1][linha + 1] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 2][linha + 2] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 3][linha + 3] === classeReferencia) { contagem++ }
-
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna + j] !== undefined) {
+                if (tabuleiro[coluna + j][linha + j] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
-            vitoria(classeReferencia)
+            vitoria(corClasse)
             break
         }
         coluna++
         linha++
     }
-
 }
 
 function verificaDiagonalDecrescente(posicao, classe) {
 
-    let classeReferencia = classe.split("-")[1]
+    let corClasse = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1] + 3
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
-            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 1][linha - 1] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 2][linha - 2] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 3][linha - 3] === classeReferencia) { contagem++ }
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna + j] !== undefined) {
+                if (tabuleiro[coluna + j][linha - j] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
-            vitoria(classeReferencia)
+            vitoria(corClasse)
             break
         }
         coluna++
@@ -216,7 +219,6 @@ function verificaDiagonalDecrescente(posicao, classe) {
 function vitoria(jogador) {
 
     let stringJogador = jogador.toString().toUpperCase()
-    console.log(stringJogador)
     section.innerHTML = ""
     let vitoria = document.createElement("h1")
     vitoria.innerHTML = `${stringJogador} VENCEU!`
