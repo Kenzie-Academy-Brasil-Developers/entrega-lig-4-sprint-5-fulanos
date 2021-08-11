@@ -134,8 +134,7 @@ function verificaHorizontal(posicao, classe) {
             if (tabuleiro[coluna + 3][linha] === classeReferencia) { contagem++ }
         }
         if (contagem === 4) {
-            //funçao vitória
-            console.log(classeReferencia, "venceu")
+            vitoria(classeReferencia)
             break
         }
         coluna++
@@ -157,7 +156,7 @@ function verificaVertical(posicao, classe) {
             if (tabuleiro[x][y + 3] === corClasse) { contagem++ }
         }
         if (contagem === 4) {
-            console.log(corClasse, 'venceu')
+            vitoria(corClasse)
             break
         }
         y++
@@ -182,8 +181,7 @@ function verificaDiagonalCrescente(posicao, classe) {
 
         }
         if (contagem === 4) {
-            //Chamada da função de vitória AQUI
-            console.log(classeReferencia, " venceu")
+            vitoria(classeReferencia)
             break
         }
         coluna++
@@ -207,11 +205,21 @@ function verificaDiagonalDecrescente(posicao, classe) {
             if (tabuleiro[coluna + 3][linha - 3] === classeReferencia) { contagem++ }
         }
         if (contagem === 4) {
-            //Chamada da função de vitória AQUI
-            console.log(classeReferencia, " venceu")
+            vitoria(classeReferencia)
             break
         }
         coluna++
         linha--
     }
+}
+
+function vitoria(jogador) {
+
+    let stringJogador = jogador.toString().toUpperCase()
+    console.log(stringJogador)
+    section.innerHTML = ""
+    let vitoria = document.createElement("h1")
+    vitoria.innerHTML = `${stringJogador} VENCEU!`
+    section.appendChild(vitoria)
+
 }
