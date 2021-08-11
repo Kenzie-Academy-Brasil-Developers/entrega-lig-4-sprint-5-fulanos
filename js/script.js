@@ -41,7 +41,7 @@ function startGame() {
     section.innerHTML = ""
     let insersao = geraTabuleiro(tabuleiro)
     section.append(insersao)
-    button.innerText = "Reiniciar"
+    button.innerText = "Reset"
     jogada = 'vermelho' //Reiniciar o jogo com a peça vermelha. Não estava resetando o revezamento de jogador.
     selecionarTorres()
 }

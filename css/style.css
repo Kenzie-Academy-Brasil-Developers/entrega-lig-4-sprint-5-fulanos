@@ -1,4 +1,4 @@
-@keyframes animação{
+    @keyframes animação{
     0%{transform: translateY( -800px)}
     25%{transform: translateY( 5px) scale(1.2,0.8)}
     50%{transform: translateY(-90px)}
@@ -7,20 +7,22 @@
   }
 
 body{
+    background-image: url('/img/gramado.jpg');
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 h1 {
-    padding: 1em;
-    font-size: 30px;
+    color: white;
+    padding: 0.5em;
+    font-size: 50px;
     font-weight: bold;
 }
 
 .principal{
-    padding-bottom: 1em;
-    background-color: transparent;
+    margin-bottom: 1em;
+    background-image: url('/img/blue.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,36 +34,55 @@ h1 {
 }
 
 .linha{
+    margin: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 2.5em;
     width: 2.5em;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 4px solid white;
+    background-image: url('/img/gramado.jpg');
+    border-radius: 50%;
+    
 }
 
 .disco-vermelho {
-    background-color: red;
-    height: 2.3em;
-    width: 2.3em;
-    border-radius: 50px;
+    background-image: url('/img/argentina.png');
+    background-size: 100%;
+    height: 2.5em;
+    width: 2.5em;
+    border-radius: 50%;
     animation: animação 1.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 
 .disco-preto {
+    background-image: url('/img/brasil.png');
+    background-size: 100%;
     background-color: black;
     height: 2.3em;
     width: 2.3em;
-    border-radius: 50px;
+    border-radius: 50%;
     animation: animação 1.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 
 #startbutton {
-    padding: 0.5em;
+    /* padding: 2em; */
+    width: 80px;
+    height: 80px;
+    background-image: url('/img/bola.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    border-radius:50%;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+
 }
+
 @media (min-width: 425px) {
     .linha {
         height: 3.2em;
@@ -82,7 +103,7 @@ h1 {
     }
     
     .disco-vermelho, .disco-preto {
-        height: 3.8em;
-        width: 3.8em;
+        height: 4em;
+        width: 4em;
     }
 }
