@@ -1,86 +1,123 @@
 const tabuleiro = [
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "      ",
-    "      "
-]
+  "      ",
+  "      ",
+  "      ",
+  "      ",
+  "      ",
+  "      ",
+  "      ",
+];
 
-let jogada = 'vermelho'
-
+let jogada = "vermelho";
 
 function geraTabuleiro(mapa) {
+  let principal = document.createElement("div");
+  principal.classList.add("principal");
 
-    let principal = document.createElement("div")
-    principal.classList.add("principal")
-
-    for (let i = 0; i < mapa.length; i++) {
-        let coluna = document.createElement("div")
-        coluna.classList.add("coluna")
-
-        for (let j = 0; j < mapa[i].length; j++) {
-            let celula = document.createElement("div")
-            celula.classList.add("linha")
-            celula.classList.add(j)
-            coluna.append(celula)
-        }
-        principal.append(coluna)
+  for (let i = 0; i < mapa.length; i++) {
+    let coluna = document.createElement("div");
+    coluna.classList.add("coluna");
+    coluna.classList.add(i);
+    for (let j = 0; j < mapa[i].length; j++) {
+      let celula = document.createElement("div");
+      celula.classList.add("linha");
+      celula.classList.add(j);
+      coluna.append(celula);
     }
-    return principal
+    principal.append(coluna);
+  }
+  return principal;
 }
 
-let button = document.getElementById("startbutton")
-button.addEventListener("click", startGame)
+let button = document.getElementById("startbutton");
+button.addEventListener("click", startGame);
 
-let section = document.querySelector("section")
+let section = document.querySelector("section");
 function startGame() {
-    section.innerHTML = ""
-    let insersao = geraTabuleiro(tabuleiro)
-    section.append(insersao)
-    button.innerText = "Reiniciar"
-    selecionarTorres()
+  section.innerHTML = "";
+  let insersao = geraTabuleiro(tabuleiro);
+  section.append(insersao);
+  button.innerText = "Reiniciar";
+  selecionarTorres();
 }
 
 function selecionarTorres() {
+  let torres = document.querySelectorAll(".coluna");
+  torres = [...torres];
 
-    let torres = document.querySelectorAll('.coluna')
-    torres = [...torres]    
-
-    torres.forEach(function (tower) {
-        tower.addEventListener("click", revezarJogador)
-    })
+  torres.forEach(function (tower) {
+    tower.addEventListener("click", revezarJogador);
+  });
 }
 
 function revezarJogador(event) {
+  let torre = Array.from(event.currentTarget.children);
 
-    let torre = Array.from(event.currentTarget.children)
+  for (let i = 0; i < torre.length; i++) {
+    if (!torre[i].hasChildNodes()) {
+      if (jogada === "vermelho") {
+        let disco = document.createElement("div");
+        disco.classList.add("disco-vermelho");
+        torre[i].appendChild(disco);
 
-    for (let i = 0; i < torre.length; i++) {
+        //console.log(disco)
+        jogada = "preto";
+        defineVitoria(disco);
+        break;
+      } else {
+        let disco = document.createElement("div");
+        disco.classList.add("disco-preto");
+        torre[i].appendChild(disco);
 
-        if (!torre[i].hasChildNodes()) {
+        //console.log(disco.parentElement)
+        jogada = "vermelho";
+        defineVitoria(disco);
+        break;
+      }
+    }
+  }
+}
 
-            if (jogada === 'vermelho') {
+function defineVitoria(disco) {
+  verificarVertical(disco);
+  //verificarHorizontal(disco)
+}
 
-                let disco = document.createElement('div')
-                disco.classList.add('disco-vermelho')
-                torre[i].appendChild(disco)
-                jogada = 'preto'
-                break
-
-            } else {
-
-                let disco = document.createElement('div')
-                disco.classList.add('disco-preto')
-                torre[i].appendChild(disco)
-                jogada = 'vermelho'
-                break
-            }
+function verificarVertical(disco){
+    let x = disco.parentElement.classList[1]
+    let colunaDisco = disco.parentElement.parentElement
+    console.log(colunaDisco)
+    console.log(x)
+    for(let i = x; i >= (x-3); i--){
+        for(let j = colunaDisco; j < colunaDisco.length; j++)
+        if([i] === 3 && j[i] && jogador == 'vermelho'){
+            alert('vermelho ganhou')
+        }else if([i] === 3 &&  colunaDisco){
+            alert('preto ganhou')
         }
     }
 }
 
-function defineVitoria() {
 
-}
+
+
+
+
+
+// console.log(x)
+// console.log(y)
+
+//[[row, col], [row, col+1], [row, col+2], [row, col+3]]
+//1 - checar possibilidades vertical-hori
+
+//.classList.contains('i')
+//disco.parentElement.classList
+
+//linha brother - disco.parentElement.children
+
+//1 - checar possibilidades vertical-hori
+
+//.classList.contains('i')
+//disco.parentElement.classList
+
+//linha brother - disco.parentElement.children
