@@ -10,6 +10,8 @@ let tabuleiro = [
 
 let jogada = 'vermelho'
 let somJogador = new Audio('audio/toin.mp3');
+let somApito = new Audio('audio/apito.mp3');
+let titulo = document.getElementsByTagName('h1')[0]
 
 function geraTabuleiro(mapa) {
 
@@ -41,7 +43,9 @@ function startGame() {
     section.innerHTML = ""
     let insersao = geraTabuleiro(tabuleiro)
     section.append(insersao)
+    apito()
     button.innerText = "Reset"
+    titulo.style.fontSize = '45px'
     jogada = 'vermelho' //Reiniciar o jogo com a peça vermelha. Não estava resetando o revezamento de jogador.
     selecionarTorres()
 }
@@ -101,6 +105,11 @@ function revezarJogador(event) {
 
     }
 
+}
+
+function apito() {
+    somApito.volume = 0.1
+    somApito.play();
 }
 
 function duasVezes() { //função que sincroniza a animação com o audio
