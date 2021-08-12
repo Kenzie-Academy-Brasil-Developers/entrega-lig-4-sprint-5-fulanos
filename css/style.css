@@ -18,7 +18,7 @@ body{
 h1 {
     font-family: 'Permanent Marker', cursive;
     text-align: center;
-    padding: 0.5em 0;
+    padding: 2em 0 3em;
     font-size: 3rem;
     font-weight: bold;
     color: rgb(6, 6, 66);
@@ -109,7 +109,7 @@ h2 {
 @media (min-width: 425px) {
     h1 {
         font-size: 4rem;
-        padding: 0.4em 0;
+        padding: 1em 0 1.5em;
     }
 
     h2 {
@@ -141,6 +141,7 @@ h2 {
 @media (min-width: 768px) {
 
     h1 {
+        padding: 0.8em 0;
         font-size: 6.8rem;
     }
 
@@ -161,7 +162,7 @@ h2 {
 
 @media screen and (min-width: 1024px) {
     h1 {
-        padding: 0.4em 0;
+        padding: 1em 0 0.8em;
     }
 
     h2 {
