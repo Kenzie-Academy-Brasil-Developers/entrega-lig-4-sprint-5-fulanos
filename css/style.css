@@ -9,7 +9,7 @@
 }
 
 body{
-    background-image: url('./img/gramado.jpg');
+    background-image: url('/img/gramado.jpg');
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +46,7 @@ h2 {
 
 .principal{
     margin-bottom: 1em;
-    background-image: url('./img/blue.jpg');
+    background-image: url('/img/blue.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -65,12 +65,12 @@ h2 {
     height: 2.1em;
     width: 2.1em;
     border: 3px solid white;
-    background-image: url('./img/gramado.jpg');
+    background-image: url('/img/gramado.jpg');
     border-radius: 50%;
 }
 
 .disco-brasil {
-    background-image: url('./img/brasil.png');
+    background-image: url('/img/brasil.png');
     background-size: 100% 100%;
     height: 2.1em;
     width: 2.1em;
@@ -81,7 +81,7 @@ h2 {
 }
 
 .disco-argentina {
-    background-image: url('./img/argentina.png');
+    background-image: url('/img/argentina.png');
     background-size: 100% 100%;
     background-color: black;
     height: 2.1em;
@@ -95,7 +95,7 @@ h2 {
 #startbutton {
     width: 75px;
     height: 75px;
-    background-image: url('./img/bola.png');
+    background-image: url('/img/bola.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border-radius:50%;
