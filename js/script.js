@@ -62,6 +62,18 @@ function selecionarTorres() {
     torres.forEach(function (tower) {
         tower.addEventListener("click", revezarJogador)
     })
+
+}
+
+function removeTorres() {
+
+    let torres = document.querySelectorAll('.coluna')
+    torres = [...torres]
+
+    torres.forEach(function (tower) {
+        tower.removeEventListener("click", revezarJogador)
+    })
+
 }
 
 function revezarJogador(event) {
@@ -153,7 +165,8 @@ function verificaHorizontal(posicao, classe) {
             }
         }
         if (contagem === 4) {
-            vitoria(corClasse)
+            removeTorres()
+            setTimeout(vitoria, 2000, corClasse);
             break
         }
         coluna++
@@ -177,7 +190,8 @@ function verificaVertical(posicao, classe) {
             }
         }
         if (contagem === 4) {
-            vitoria(corClasse)
+            removeTorres()
+            setTimeout(vitoria, 2000, corClasse);
             break
         }
         linha++
@@ -201,7 +215,8 @@ function verificaDiagonalCrescente(posicao, classe) {
             }
         }
         if (contagem === 4) {
-            vitoria(corClasse)
+            removeTorres()
+            setTimeout(vitoria, 2000, corClasse);
             break
         }
         coluna++
@@ -226,7 +241,8 @@ function verificaDiagonalDecrescente(posicao, classe) {
         }
 
         if (contagem === 4) {
-            vitoria(corClasse)
+            removeTorres()
+            setTimeout(vitoria, 2000, corClasse);
             break
         }
         coluna++
