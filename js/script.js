@@ -8,8 +8,12 @@ let tabuleiro = [
     [[""], [""], [""], [""], [""], [""]]
 ]
 
-let jogada = 'vermelho'
+let jogada = 'brasil'
 let somJogador = new Audio('audio/toin.mp3');
+let somApito = new Audio('audio/apito.mp3');
+let somTorcida = new Audio('audio/torcida.mp3');
+let titulo = document.getElementsByTagName('h1')[0]
+let telaJogador = document.getElementsByTagName('h2')[0]
 
 function geraTabuleiro(mapa) {
 
@@ -41,8 +45,12 @@ function startGame() {
     section.innerHTML = ""
     let insersao = geraTabuleiro(tabuleiro)
     section.append(insersao)
-    button.innerText = "Reiniciar"
-    jogada = 'vermelho' //Reiniciar o jogo com a peça vermelha. Não estava resetando o revezamento de jogador.
+    apito()
+    button.innerText = "Reset"
+    titulo.style.display = 'none'
+    jogada = 'brasil' //Reiniciar o jogo com a peça do Brasil. Não estava resetando o revezamento de jogador.
+    telaJogador.innerHTML = 'Jogada Brasil'
+    telaJogador.style.display = 'block'
     selecionarTorres()
 }
 
@@ -63,10 +71,10 @@ function revezarJogador(event) {
 
         if (!torre[i].hasChildNodes()) {
 
-            if (jogada === 'vermelho') {
+            if (jogada === 'brasil') {
 
                 let disco = document.createElement('div')
-                disco.classList.add('disco-vermelho')
+                disco.classList.add('disco-brasil')
                 torre[i].appendChild(disco)
 
                 let celulaDisco = disco.parentElement
@@ -75,15 +83,16 @@ function revezarJogador(event) {
                 let classeDisco = disco.classList[0]
                 tabuleiro[posicaoDisco[0]][posicaoDisco[1]] = jogada
 
-                duasVezes() //efeito de áudio
-                jogada = 'preto'
+                toca() //efeito de áudio
+                jogada = 'argentina'
+                telaJogador.innerHTML = 'Jogada Argentina'
                 defineVitoria(posicaoDisco, classeDisco)
                 break
 
             } else {
 
                 let disco = document.createElement('div')
-                disco.classList.add('disco-preto')
+                disco.classList.add('disco-argentina')
                 torre[i].appendChild(disco)
 
                 let celulaDisco = disco.parentElement
@@ -92,8 +101,9 @@ function revezarJogador(event) {
                 let classeDisco = disco.classList[0]
                 tabuleiro[posicaoDisco[0]][posicaoDisco[1]] = jogada
 
-                duasVezes() //efeito de áudio
-                jogada = 'vermelho'
+                toca() //efeito de áudio
+                jogada = 'brasil'
+                telaJogador.innerHTML = 'Jogada Brasil'
                 defineVitoria(posicaoDisco, classeDisco)
                 break
             }
@@ -103,13 +113,20 @@ function revezarJogador(event) {
 
 }
 
-function duasVezes() { //função que sincroniza a animação com o audio
-    function toca() {
-        somJogador.volume = 0.1
-        somJogador.play();
-    }
-    toca();
-    setTimeout(toca, 1000);
+function apito() {
+    somApito.volume = 0.1
+    somApito.play();
+}
+
+//função que sincroniza a animação com o audio
+function toca() {
+    somJogador.volume = 0.1
+    somJogador.play();
+}
+
+function torcida() {
+    somTorcida.volume = 0.1
+    somTorcida.play();
 }
 
 function defineVitoria(posicao, classe) {
@@ -121,20 +138,22 @@ function defineVitoria(posicao, classe) {
 
 function verificaHorizontal(posicao, classe) {
 
-    let classeReferencia = classe.split("-")[1]
+    let corClasse = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1]
+
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
-            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 1][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 2][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 3][linha] === classeReferencia) { contagem++ }
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna + j] !== undefined) {
+                if (tabuleiro[coluna + j][linha] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
-            vitoria(classeReferencia)
+            vitoria(corClasse)
             break
         }
         coluna++
@@ -142,70 +161,72 @@ function verificaHorizontal(posicao, classe) {
 }
 
 function verificaVertical(posicao, classe) {
-    let contagem = 0
-    let corClasse = classe.split("-")[1]
-    let x = posicao[0] //coluna
-    let y = posicao[1] - 3 //linha
 
-    for (let i = 0; i < 4; i++) {
+    let corClasse = classe.split("-")[1]
+    let conjuntos = 1
+    let coluna = posicao[0]
+    let linha = posicao[1] - 3
+
+    for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-        if (y >= 0 && y <= 5 && x >= 0 && x <= 6) {
-            if (tabuleiro[x][y] === corClasse) { contagem++ }
-            if (tabuleiro[x][y + 1] === corClasse) { contagem++ }
-            if (tabuleiro[x][y + 2] === corClasse) { contagem++ }
-            if (tabuleiro[x][y + 3] === corClasse) { contagem++ }
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna][linha + j] !== undefined) {
+                if (tabuleiro[coluna][linha + j] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
             vitoria(corClasse)
             break
         }
-        y++
+        linha++
     }
 }
 
 function verificaDiagonalCrescente(posicao, classe) {
 
-    let classeReferencia = classe.split("-")[1]
+    let corClasse = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1] - 3
 
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-
-        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
-            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 1][linha + 1] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 2][linha + 2] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 3][linha + 3] === classeReferencia) { contagem++ }
-
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna + j] !== undefined) {
+                if (tabuleiro[coluna + j][linha + j] === corClasse) {
+                    contagem++
+                }
+            }
         }
         if (contagem === 4) {
-            vitoria(classeReferencia)
+            vitoria(corClasse)
             break
         }
         coluna++
         linha++
     }
-
 }
 
 function verificaDiagonalDecrescente(posicao, classe) {
 
-    let classeReferencia = classe.split("-")[1]
+    let corClasse = classe.split("-")[1]
     let conjuntos = 4
     let coluna = posicao[0] - 3
     let linha = posicao[1] + 3
     for (let i = 0; i < conjuntos; i++) {
         let contagem = 0
-        if (coluna >= 0 && coluna <= 6 && linha >= 0 && linha <= 5) {
-            if (tabuleiro[coluna][linha] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 1][linha - 1] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 2][linha - 2] === classeReferencia) { contagem++ }
-            if (tabuleiro[coluna + 3][linha - 3] === classeReferencia) { contagem++ }
+        for (let j = 0; j < 4; j++) {
+            if (tabuleiro[coluna + j] !== undefined) {
+                if (tabuleiro[coluna + j][linha - j] === corClasse) {
+                    contagem++
+                }
+            }
         }
+
         if (contagem === 4) {
-            vitoria(classeReferencia)
+            vitoria(corClasse)
             break
         }
         coluna++
@@ -216,10 +237,10 @@ function verificaDiagonalDecrescente(posicao, classe) {
 function vitoria(jogador) {
 
     let stringJogador = jogador.toString().toUpperCase()
-    console.log(stringJogador)
     section.innerHTML = ""
     let vitoria = document.createElement("h1")
     vitoria.innerHTML = `${stringJogador} VENCEU!`
+    telaJogador.style.display = 'none';
+    torcida()
     section.appendChild(vitoria)
-
 }

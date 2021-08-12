@@ -1,26 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
 @keyframes animação{
     0%{transform: translateY( -800px)}
     25%{transform: translateY( 5px) scale(1.2,0.8)}
     50%{transform: translateY(-90px)}
     75%{transform: translateY(5px) scale(1.2,0.8)}
     100%{transform: translateY(0px)}
-  }
+}
 
 body{
+    background-image: url('/img/gramado.jpg');
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 h1 {
-    padding: 1em;
-    font-size: 30px;
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    padding: 0.5em 0;
+    font-size: 3rem;
     font-weight: bold;
+    color: rgb(6, 6, 66);
+    text-shadow: 
+    -1px -1px 0px #FFF, 
+    -1px 5px 0px #FFF,                    
+     2px -1px 0px #FFF,                  
+     5px 0px 0px #FFF;
+}
+
+h2 {
+    display: none;
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    padding: 0.7em 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgb(6, 6, 66);
+    text-shadow: 
+    -1px -1px 0px #FFF, 
+    -1px 5px 0px #FFF,                    
+     2px -1px 0px #FFF,                  
+     5px 0px 0px #FFF;
 }
 
 .principal{
-    padding-bottom: 1em;
-    background-color: transparent;
+    margin-bottom: 1em;
+    background-image: url('/img/blue.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,57 +58,130 @@ h1 {
 }
 
 .linha{
+    margin: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 2.5em;
-    width: 2.5em;
-    border: 1px solid black;
-    border-radius: 10px;
+    height: 2.1em;
+    width: 2.1em;
+    border: 3px solid white;
+    background-image: url(/img/gramado.jpg);
+    border-radius: 50%;
 }
 
-.disco-vermelho {
-    background-color: red;
-    height: 2.3em;
-    width: 2.3em;
-    border-radius: 50px;
+.disco-brasil {
+    background-image: url(/img/brasil.png);
+    background-size: 100% 100%;
+    height: 2.1em;
+    width: 2.1em;
+    border: 2px solid white;
+    border-radius: 50%;
     animation: animação 1.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.disco-preto {
+.disco-argentina {
+    background-image: url(/img/argentina.png);
+    background-size: 100% 100%;
     background-color: black;
-    height: 2.3em;
-    width: 2.3em;
-    border-radius: 50px;
+    height: 2.1em;
+    width: 2.1em;
+    border: 2px solid white;
+    border-radius: 50%;
     animation: animação 1.5s ease-in-out;
     animation-fill-mode: forwards;
 }
 
 #startbutton {
-    padding: 0.5em;
+    /* padding: 2em; */
+    width: 75px;
+    height: 75px;
+    background-image: url(/img/bola.png);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius:50%;
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
+
 @media (min-width: 425px) {
-    .linha {
-        height: 3.2em;
-        width: 3.2em;
+    h1 {
+        font-size: 4rem;
+        padding: 0.4em 0;
     }
-    
-    .disco-vermelho, .disco-preto {
+
+    h2 {
+        font-size: 2.5rem;
+        padding: 0.5em 0;
+    }
+
+    .principal {
+        margin-bottom: 0.8em;
+    }
+
+    .linha {
         height: 3em;
         width: 3em;
     }
+    
+    .disco-brasil, .disco-argentina {
+        height: 3em;
+        width: 3em;
+    }
+
+    #startbutton {
+        width: 70px;
+        height: 70px;
+        font-size: 21px;
+    }
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
+
+    h1 {
+        font-size: 6.8rem;
+    }
+
+    h2 {
+        font-size: 4rem;
+    }
 
     .linha {
         height: 4em;
         width: 4em;
     }
     
-    .disco-vermelho, .disco-preto {
-        height: 3.8em;
-        width: 3.8em;
+    .disco-brasil, .disco-argentina {
+        height: 4em;
+        width: 4em;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    h1 {
+        padding: 0.4em 0;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+
+    #startbutton {
+        width: 75px;
+        height: 75px;
+        font-size: 25px;
+    }
+
+    .linha {
+        height: 3.5em;
+        width: 3.5em;
+    }
+    
+    .disco-brasil, .disco-argentina {
+        height: 3.5em;
+        width: 3.5em;
     }
 }
