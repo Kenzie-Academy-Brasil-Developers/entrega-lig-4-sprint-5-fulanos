@@ -52,9 +52,9 @@ h2 {
     align-items: center;
 }
 
-.coluna{ /* alterei para ".coluna", pois tinham 2 ".linha" */
+.coluna{
     display: flex;
-    flex-direction: column-reverse;  /* alterei para "column-reverse", pois estava como row a coluna */
+    flex-direction: column-reverse;
 }
 
 .linha{
@@ -93,7 +93,6 @@ h2 {
 }
 
 #startbutton {
-    /* padding: 2em; */
     width: 75px;
     height: 75px;
     background-image: url(/img/bola.png);
@@ -135,7 +134,7 @@ h2 {
     #startbutton {
         width: 70px;
         height: 70px;
-        font-size: 21px;
+        font-size: 20px;
     }
 }
 
@@ -172,7 +171,7 @@ h2 {
     #startbutton {
         width: 75px;
         height: 75px;
-        font-size: 25px;
+        font-size: 21px;
     }
 
     .linha {
