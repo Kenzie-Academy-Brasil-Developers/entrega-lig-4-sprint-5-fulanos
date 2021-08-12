@@ -8,8 +8,12 @@ let tabuleiro = [
     [[""], [""], [""], [""], [""], [""]]
 ]
 
-let jogada = 'vermelho'
+let jogada = 'brasil'
 let somJogador = new Audio('audio/toin.mp3');
+let somApito = new Audio('audio/apito.mp3');
+let somTorcida = new Audio('audio/torcida.mp3');
+let titulo = document.getElementsByTagName('h1')[0]
+let telaJogador = document.getElementsByTagName('h2')[0]
 
 function geraTabuleiro(mapa) {
 
@@ -41,8 +45,12 @@ function startGame() {
     section.innerHTML = ""
     let insersao = geraTabuleiro(tabuleiro)
     section.append(insersao)
-    button.innerText = "Reiniciar"
-    jogada = 'vermelho' //Reiniciar o jogo com a peça vermelha. Não estava resetando o revezamento de jogador.
+    apito()
+    button.innerText = "Reset"
+    titulo.style.display = 'none'
+    jogada = 'brasil' //Reiniciar o jogo com a peça do Brasil. Não estava resetando o revezamento de jogador.
+    telaJogador.innerHTML = 'Jogada Brasil'
+    telaJogador.style.display = 'block'
     selecionarTorres()
 }
 
@@ -63,10 +71,10 @@ function revezarJogador(event) {
 
         if (!torre[i].hasChildNodes()) {
 
-            if (jogada === 'vermelho') {
+            if (jogada === 'brasil') {
 
                 let disco = document.createElement('div')
-                disco.classList.add('disco-vermelho')
+                disco.classList.add('disco-brasil')
                 torre[i].appendChild(disco)
 
                 let celulaDisco = disco.parentElement
@@ -75,15 +83,16 @@ function revezarJogador(event) {
                 let classeDisco = disco.classList[0]
                 tabuleiro[posicaoDisco[0]][posicaoDisco[1]] = jogada
 
-                duasVezes() //efeito de áudio
-                jogada = 'preto'
+                toca() //efeito de áudio
+                jogada = 'argentina'
+                telaJogador.innerHTML = 'Jogada Argentina'
                 defineVitoria(posicaoDisco, classeDisco)
                 break
 
             } else {
 
                 let disco = document.createElement('div')
-                disco.classList.add('disco-preto')
+                disco.classList.add('disco-argentina')
                 torre[i].appendChild(disco)
 
                 let celulaDisco = disco.parentElement
@@ -92,8 +101,9 @@ function revezarJogador(event) {
                 let classeDisco = disco.classList[0]
                 tabuleiro[posicaoDisco[0]][posicaoDisco[1]] = jogada
 
-                duasVezes() //efeito de áudio
-                jogada = 'vermelho'
+                toca() //efeito de áudio
+                jogada = 'brasil'
+                telaJogador.innerHTML = 'Jogada Brasil'
                 defineVitoria(posicaoDisco, classeDisco)
                 break
             }
@@ -103,13 +113,20 @@ function revezarJogador(event) {
 
 }
 
-function duasVezes() { //função que sincroniza a animação com o audio
-    function toca() {
-        somJogador.volume = 0.1
-        somJogador.play();
-    }
-    toca();
-    setTimeout(toca, 1000);
+function apito() {
+    somApito.volume = 0.1
+    somApito.play();
+}
+
+//função que sincroniza a animação com o audio
+function toca() {
+    somJogador.volume = 0.1
+    somJogador.play();
+}
+
+function torcida() {
+    somTorcida.volume = 0.1
+    somTorcida.play();
 }
 
 function defineVitoria(posicao, classe) {
@@ -207,6 +224,7 @@ function verificaDiagonalDecrescente(posicao, classe) {
                 }
             }
         }
+
         if (contagem === 4) {
             vitoria(corClasse)
             break
@@ -222,6 +240,7 @@ function vitoria(jogador) {
     section.innerHTML = ""
     let vitoria = document.createElement("h1")
     vitoria.innerHTML = `${stringJogador} VENCEU!`
+    telaJogador.style.display = 'none';
+    torcida()
     section.appendChild(vitoria)
-
 }
