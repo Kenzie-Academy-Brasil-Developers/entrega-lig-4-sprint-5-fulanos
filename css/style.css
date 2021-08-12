@@ -145,17 +145,17 @@ h2 {
     }
 
     h2 {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     .linha {
-        height: 4em;
-        width: 4em;
+        height: 3.5em;
+        width: 3.5em;
     }
     
     .disco-brasil, .disco-argentina {
-        height: 4em;
-        width: 4em;
+        height: 3.5em;
+        width: 3.5em;
     }
 }
 
